@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from mocker import app
+from crawler.manager import app
 
 @app.route('/')
 def hello_world():
