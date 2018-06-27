@@ -19,9 +19,9 @@ def summary():
     })
     
 
-@app.route('/add/<Project:a>', methods=['POST'])
-def add():
+@app.route('/add/<Project:project>', methods=['POST'])
+def add(project):
     print('aaa')
-    db.session.add(a)
+    db.session.add(project)
     db.session.commit()
     print('bbb')
