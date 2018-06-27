@@ -19,7 +19,7 @@ def summary():
     })
     
 
-@app.route('/add<Project:a>', methods=['POST'])
+@app.route('/add/<Project:a>', methods=['POST'])
 def add():
     print('aaa')
     db.session.add(a)
