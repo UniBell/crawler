@@ -8,9 +8,23 @@ from flask import jsonify
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/api/project')
-def get_data():
+@app.route('/list')
+def summary():
+    array = (
+        {
+            'name': 'a'
+        },
+        {
+            'name': 'b'
+        },
+        {
+            'name': 'c'
+        }
+    )
     return jsonify({
-        'name': '123'
+        'data': array
     })
+
+# @app.route('/add', method=POST)
+# def add():
 
