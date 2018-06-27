@@ -9,5 +9,7 @@ def hello_world():
 
 @app.route('/api/project')
 def get_data():
-    return '123'
+    return jsonsify({
+        'name': '123'
+    })
 
