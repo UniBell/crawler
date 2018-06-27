@@ -4,7 +4,7 @@
 from crawler.manager import app
 from crawler.manager import db
 from flask import jsonify
-from model import Project
+from crawler.manager.model import Project
 
 @app.route('/')
 def hello_world():
