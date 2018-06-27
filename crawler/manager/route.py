@@ -28,8 +28,7 @@ def add():
         {
             'base_url': 'https://club.jd.com/comment/productPageComments.action',
             'interval': 3600
-        },
-        'test'
+        }
     )
     db.session.add(a)
     db.session.commit()
