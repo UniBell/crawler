@@ -25,7 +25,7 @@ def add():
         '1', 
         'abc', 
         1, 
-        'config' : {
+        {
             'base_url': 'https://club.jd.com/comment/productPageComments.action',
             'interval': 3600
         },
