@@ -19,7 +19,7 @@ def summary():
     })
     
 
-@app.route('/add', method=POST)
+@app.route('/add')
 def add():
     a = Project(
         '1', 
@@ -33,4 +33,5 @@ def add():
     )
     db.session.add(a)
     db.session.commit()
+    return jsonify(a)
 
