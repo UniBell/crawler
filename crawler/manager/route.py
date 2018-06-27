@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from crawler.manager import app
+from flask import jsonify
 
 @app.route('/')
 def hello_world():
@@ -9,7 +10,7 @@ def hello_world():
 
 @app.route('/api/project')
 def get_data():
-    return jsonsify({
+    return jsonify({
         'name': '123'
     })
 
