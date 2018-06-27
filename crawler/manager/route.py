@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from crawler.manager import app
+from crawler.manager import db
 from flask import jsonify
+from model import Project
 
 @app.route('/')
 def hello_world():
@@ -10,21 +12,25 @@ def hello_world():
 
 @app.route('/list')
 def summary():
-    array = (
-        {
-            'name': 'a'
-        },
-        {
-            'name': 'b'
-        },
-        {
-            'name': 'c'
-        }
-    )
+    cursor = db.cursor()
+    data = cursor.fetchone()
     return jsonify({
-        'data': array
+        'data': data
     })
+    
 
-# @app.route('/add', method=POST)
-# def add():
+@app.route('/add', method=POST)
+def add():
+    a = Project(
+        '1', 
+        'abc', 
+        1, 
+        'config' : {
+            "base_url": "https://club.jd.com/comment/productPageComments.action",
+            "interval": 3600
+        },
+        'test'
+    )
+    db.session.add(a)
+    db.session.commit()
 
