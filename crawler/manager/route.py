@@ -33,5 +33,3 @@ def add():
     )
     db.session.add(a)
     db.session.commit()
-    return jsonify(a)
-
