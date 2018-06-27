@@ -19,8 +19,9 @@ def summary():
     })
     
 
-@app.route('/add')
+@app.route('/add', methods=['POST'])
 def add():
+    print('aaa')
     a = Project(
         '1', 
         'abc', 
@@ -28,7 +29,9 @@ def add():
         {
             'base_url': 'https://club.jd.com/comment/productPageComments.action',
             'interval': 3600
-        }
+        },
+        'test'
     )
     db.session.add(a)
     db.session.commit()
+    print('bbb')
