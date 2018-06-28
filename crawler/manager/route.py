@@ -27,9 +27,9 @@ def summary():
     
 
 @app.route('/add', methods=['POST'])
-def add(param):
+def add():
     print('aaa')
-    if request.method == 'POST' and request.form.get(param):
+    if request.method == 'POST' and request.form.get():
         datax = request.form.to_dict()
         content = str(datax)  
         db.session.add(content)
