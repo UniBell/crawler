@@ -5,6 +5,13 @@ from crawler.manager import app
 from crawler.manager import db
 from flask import jsonify
 from crawler.manager.model import Project
+from flask import request
+from flask import make_response,Response
+
+def Response_headers(content):  
+    resp = Response(content)  
+    resp.headers['Access-Control-Allow-Origin'] = '*'  
+    return resp
 
 @app.route('/')
 def hello_world():
@@ -19,9 +26,14 @@ def summary():
     })
     
 
-@app.route('/add/<Project:project>', methods=['POST'])
-def add(project):
+@app.route('/add', methods=['POST'])
+def add(param):
     print('aaa')
+    if request.method == 'POST' and request.form.get(param):
+        datax = request.form.to_dict()
+        content = Project(datax)  
+        resp = Response_headers(content)  
+        return resp
     db.session.add(project)
     db.session.commit()
     print('bbb')
