@@ -31,9 +31,9 @@ def add(param):
     print('aaa')
     if request.method == 'POST' and request.form.get(param):
         datax = request.form.to_dict()
-        content = Project(datax)  
+        content = str(datax)  
+        db.session.add(content)
+        db.session.commit()
         resp = Response_headers(content)  
         return resp
-    db.session.add(project)
-    db.session.commit()
     print('bbb')
