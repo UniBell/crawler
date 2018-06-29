@@ -23,7 +23,7 @@ def summary():
     sql = 'select * from project;'
     data = db.session.execute(sql)
     for u in data:
-        print(u.__dict__)
+        print(u.to_dict())
     dic = data.to_dict()
     return jsonify({
         'data': dic
