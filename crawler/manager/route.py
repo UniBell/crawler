@@ -36,7 +36,7 @@ def add():
         behavior = request.form.get('behavior')
         config = {}
 
-        Project project = Project(project_id, name, behavior, config, desc)
+        project = Project(project_id, name, behavior, config, desc)
         db.session.add(project)
         db.session.commit()
         resp = Response_headers(project)  
