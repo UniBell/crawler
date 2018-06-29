@@ -29,11 +29,16 @@ def summary():
 @app.route('/add', methods=['POST'])
 def add():
     print('aaa')
-    if request.method == 'POST' and request.form.get():
-        datax = request.form.to_dict()
-        content = str(datax)  
-        db.session.add(content)
+    if request.method == 'POST':
+        project_id = request.form.get('id')
+        name = request.form.get('name')
+        desc = request.form.get('desc')
+        behavior = request.form.get('behavior')
+        config = {}
+
+        Project project = Project(project_id, name, behavior, config, desc)
+        db.session.add(project)
         db.session.commit()
-        resp = Response_headers(content)  
+        resp = Response_headers(project)  
         return resp
     print('bbb')
