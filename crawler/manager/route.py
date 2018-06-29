@@ -20,7 +20,7 @@ def hello_world():
 @app.route('/list')
 def summary():
     # list = Project.query.all()
-    sql = 'select * from Project;'
+    sql = 'select * from crawler;'
     list = db.session.execute(sql)
     return jsonify({
         'data': list
