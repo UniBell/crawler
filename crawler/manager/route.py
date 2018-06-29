@@ -30,20 +30,14 @@ def summary():
 def add():
     print('aaa')
     if request.method == 'POST':
-        project_id = request.form.get('id')
-        name = request.form.get('name')
-        desc = request.form.get('desc')
-        behavior = request.form.get('behavior')
-        config = ''
         dic = {
-            'id': project_id,
-            'name': name,
-            'behavior': behavior,
-            'config': config,
-            'desc': desc
+            'id': request.form.get('id'),
+            'name': request.form.get('name'),
+            'behavior': request.form.get('behavior'),
+            'config': request.form.get('config'),
+            'desc': request.form.get('desc')
         }
         project = Project(**dic)
-        # project = Project(project_id, name, behavior, config, desc)
         db.session.add(project)
         db.session.commit()
         resp = Response_headers(project)  
