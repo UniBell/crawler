@@ -34,7 +34,7 @@ def add():
         name = request.form.get('name')
         desc = request.form.get('desc')
         behavior = request.form.get('behavior')
-        config = {}
+        config = ''
         dic = {
             'id': project_id,
             'name': name,
