@@ -19,16 +19,14 @@ def hello_world():
 
 @app.route('/list')
 def summary():
-    cursor = db.cursor()
-    data = cursor.fetchone()
+    list = Project.query.all()
     return jsonify({
-        'data': data
+        'data': list
     })
     
 
 @app.route('/add', methods=['POST'])
 def add():
-    print('aaa')
     if request.method == 'POST':
         dic = {
             'id': request.form.get('id'),
@@ -40,6 +38,5 @@ def add():
         project = Project(**dic)
         db.session.add(project)
         db.session.commit()
-        resp = Response_headers(project)  
+        resp = Response_headers(dic)  
         return resp
-    print('bbb')
