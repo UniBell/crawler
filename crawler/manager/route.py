@@ -7,6 +7,7 @@ from flask import jsonify
 from crawler.manager.model import Project
 from flask import request
 from flask import make_response,Response
+from sqlalchemy.ext.declarative import DeclarativeMeta
 
 def Response_headers(content):  
     resp = Response(content)  
@@ -22,7 +23,7 @@ def summary():
     # list = project.query.all()
     sql = 'select * from project;'
     data = db.session.execute(sql)
-    return data
+    return json.JSONEncoder.default(self, data)
 
 @app.route('/add', methods=['POST'])
 def add():
