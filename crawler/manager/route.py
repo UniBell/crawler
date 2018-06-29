@@ -19,7 +19,9 @@ def hello_world():
 
 @app.route('/list')
 def summary():
-    list = Project.query.all()
+    # list = Project.query.all()
+    sql = 'select * from Project;'
+    list = db.session.execute(sql)
     return jsonify({
         'data': list
     })
