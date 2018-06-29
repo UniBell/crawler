@@ -22,8 +22,9 @@ def summary():
     # list = project.query.all()
     sql = 'select * from project;'
     data = db.session.execute(sql)
+    dic = data.to_dict()
     return jsonify({
-        'data': Project.dump(data)
+        'data': dic
     })
     
 
