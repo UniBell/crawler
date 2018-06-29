@@ -22,10 +22,7 @@ def summary():
     # list = project.query.all()
     sql = 'select * from project;'
     data = db.session.execute(sql)
-    return jsonify({
-        'data': data
-    })
-    
+    return data
 
 @app.route('/add', methods=['POST'])
 def add():
