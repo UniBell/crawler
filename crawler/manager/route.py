@@ -22,10 +22,12 @@ def summary():
     # list = project.query.all()
     sql = 'select * from project;'
     data = db.session.execute(sql)
+    l = []
     for a in data:
         print(a)
+        l.append(a)
     return jsonify({
-        'data': data
+        'data': l
     })
     
 
