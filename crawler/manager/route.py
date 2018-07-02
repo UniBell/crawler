@@ -25,7 +25,7 @@ def summary():
     l = []
     for a in data:
         print(a)
-        l.append(a)
+        l.append(a.to_dict())
     return jsonify({
         'data': l
     })
