@@ -25,11 +25,14 @@ def summary():
     l = []
     for row in data:
         result = {} 
-        result['id'] = row[0]  
-        result['name'] = row[1]  
-        result['behavior'] = row[2]
-        result['config'] = row[3]
-        result['desc'] = row[4]
+        columns = ['id', 'name', 'behavior', 'config', 'desc']
+        for i, column in enumerate(columns):
+            result[column] = row[i]
+        #result['id'] = row[0]  
+        #result['name'] = row[1]  
+        #result['behavior'] = row[2]
+        #result['config'] = row[3]
+        #result['desc'] = row[4]
         l.append(result)
     return jsonify({
         'data': l
