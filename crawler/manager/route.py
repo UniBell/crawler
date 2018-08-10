@@ -23,9 +23,14 @@ def summary():
     sql = 'select * from project;'
     data = db.session.execute(sql)
     l = []
-    for a in data:
-        print(a)
-        l.append(a.to_dict())
+    for row in data:
+        result = {} 
+        result['id'] = row[0]  
+        result['name'] = row[1]  
+        result['behavior'] = row[2]
+        result['config'] = row[3]
+        result['desc'] = row[4]
+        l.append(result)
     return jsonify({
         'data': l
     })
@@ -46,3 +51,8 @@ def add():
         db.session.commit()
         resp = Response_headers(dic)  
         return resp
+
+@app.route('/delete', methods=['POST'])
+def delete():
+    if request.method == 'POST':
+        return ''
