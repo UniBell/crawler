@@ -4,6 +4,7 @@
 from crawler.manager import app
 from crawler.manager import db
 from flask import jsonify
+from crawler.manager import utils
 from crawler.manager.model import Project
 from flask import request
 from flask import make_response,Response
@@ -19,21 +20,10 @@ def hello_world():
 
 @app.route('/list')
 def summary():
-    # list = project.query.all()
-    sql = 'select * from project;'
-    data = db.session.execute(sql)
+    rows = Project.query.all()
     l = []
-    for row in data:
-        result = {} 
-        columns = ['id', 'name', 'behavior', 'config', 'desc']
-        for i, column in enumerate(columns):
-            result[column] = row[i]
-        #result['id'] = row[0]  
-        #result['name'] = row[1]  
-        #result['behavior'] = row[2]
-        #result['config'] = row[3]
-        #result['desc'] = row[4]
-        l.append(result)
+    for row in rows:
+        l.append(utils.object_as_dict(row))
     return jsonify({
         'data': l
     })
