@@ -44,10 +44,13 @@ def add():
         db.session.commit()
         resp = Response_headers(dic)  
         return {
-            "message": "success",
-            "code": "200",
-            "data": jsonify(resp)
+           "data": jsonify(resp) 
         }
+        # return {
+        #     "message": "success",
+        #     "code": "200",
+        #     "data": jsonify(resp)
+        # }
 
 @app.route('/delete', methods=['POST'])
 def delete():
