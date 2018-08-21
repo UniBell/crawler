@@ -45,7 +45,7 @@ def add():
         resp = Response_headers(dic)  
         return {
             "message": "success",
-            "code": 200,
+            "code": "200",
             "data": jsonify(resp)
         }
 
