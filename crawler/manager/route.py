@@ -42,13 +42,10 @@ def add():
         project = Project(**dic)
         db.session.add(project)
         db.session.commit()
-        resp = Response_headers(dic)  
-        return resp
-        # return {
-        #     "message": "success",
-        #     "code": "200",
-        #     "data": jsonify(resp)
-        # }
+        return {
+            "message": "success",
+            "code": "200"
+        }
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -65,10 +62,7 @@ def update():
             'config': request.form.get('config'),
             'desc': request.form.get('desc')
         }
-        project = Project(**dic)
-        db.session.add(project)
         db.session.query(Project).filter(Project.id == projectId).update({Project: dic})
-
         db.session.commit()
         return {
             "message": 'success'
