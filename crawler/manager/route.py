@@ -66,7 +66,7 @@ def update():
         }
         project = Project(**dic)
         db.session.add(project)
-        session.query(User).filter(Project.id == projectId).update({Project: dic})
+        db.session.query(User).filter(Project.id == projectId).update({Project: dic})
 
         db.session.commit()
         return {
