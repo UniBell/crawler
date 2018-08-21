@@ -43,9 +43,32 @@ def add():
         db.session.add(project)
         db.session.commit()
         resp = Response_headers(dic)  
-        return resp
+        return jsonify({
+            "message": "success",
+            "code": 200,
+            "data": resp
+        })
 
 @app.route('/delete', methods=['POST'])
 def delete():
     if request.method == 'POST':
         return ''
+
+@app.route('/update', methods=['POST'])
+def update():
+    if request.method == 'POST':
+        projectId = request.form.get('id')
+        dic = {
+            'name': request.form.get('name'),
+            'behavior': request.form.get('behavior'),
+            'config': request.form.get('config'),
+            'desc': request.form.get('desc')
+        }
+        project = Project(**dic)
+        db.session.add(project)
+        session.query(User).filter(Project.id == projectId).update({Project: dic})
+
+        db.session.commit()
+        return {
+            "message": 'success'
+        }
