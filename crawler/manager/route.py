@@ -43,9 +43,9 @@ def add():
         db.session.add(project)
         db.session.commit()
         resp = Response_headers(dic)  
-        return {
-           "data": jsonify(resp) 
-        }
+        return jsonify({
+           "data": resp 
+        })
         # return {
         #     "message": "success",
         #     "code": "200",
