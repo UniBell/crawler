@@ -59,6 +59,7 @@ def update():
     if request.method == 'POST':
         projectId = request.form.get('id')
         dic = {
+            'id': request.form.get('id'),
             'name': request.form.get('name'),
             'behavior': request.form.get('behavior'),
             'config': request.form.get('config'),
@@ -66,7 +67,7 @@ def update():
         }
         project = Project(**dic)
         db.session.add(project)
-        db.session.query(User).filter(Project.id == projectId).update({Project: dic})
+        db.session.query(Project).filter(Project.id == projectId).update({Project: dic})
 
         db.session.commit()
         return {
