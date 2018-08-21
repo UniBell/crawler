@@ -59,7 +59,6 @@ def update():
     if request.method == 'POST':
         projectId = request.form.get('id')
         dic = {
-            'id': request.form.get('id'),
             'name': request.form.get('name'),
             'behavior': request.form.get('behavior'),
             'config': request.form.get('config'),
