@@ -43,11 +43,11 @@ def add():
         db.session.add(project)
         db.session.commit()
         resp = Response_headers(dic)  
-        return jsonify({
+        return {
             "message": "success",
             "code": 200,
-            "data": resp
-        })
+            "data": jsonify(resp)
+        }
 
 @app.route('/delete', methods=['POST'])
 def delete():
