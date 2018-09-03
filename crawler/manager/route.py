@@ -42,10 +42,9 @@ def add():
         project = Project(**dic)
         db.session.add(project)
         db.session.commit()
-        return {
+        return jsonify({
             "message": "success",
-            "code": "200"
-        }
+        })
 
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -63,16 +62,11 @@ def update():
             'desc': request.form.get('desc')
         }
         project = db.session.query(Project).filter(Project.id == projectId)
-        for key,value in dic.items():
-            print(key)
-            print(project.key)
-            project.key = value
-            db.session.commit()
         # project.name = dic['name']
         # project.behavior = dic['behavior']
         # project.config = dic['config']
-        # project.desc = dic['desc']
-        # db.session.commit()
+        project.desc = dic['desc']
+        db.session.commit()
         return jsonify({
             "message": 'success'
         })
