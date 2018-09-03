@@ -68,6 +68,6 @@ def update():
         project.config = dic['config']
         project.desc = dic['desc']
         db.session.commit()
-        return {
+        return jsonify({
             "message": 'success'
-        }
+        })
