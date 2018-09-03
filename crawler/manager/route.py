@@ -62,7 +62,11 @@ def update():
             'config': request.form.get('config'),
             'desc': request.form.get('desc')
         }
-        db.session.query(Project).filter(Project.id == projectId).update({Project.name: dic['name']})
+        project = db.session.query(Project).filter(Project.id == projectId)
+        project.name = dic['name']
+        project.behavior = dic['behavior']
+        project.config = dic['config']
+        project.desc = dic['desc']
         db.session.commit()
         return {
             "message": 'success'
