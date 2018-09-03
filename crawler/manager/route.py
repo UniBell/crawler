@@ -49,7 +49,12 @@ def add():
 @app.route('/delete', methods=['POST'])
 def delete():
     if request.method == 'POST':
-        return ''
+        project = Project.query.filter_by(id = request.form.get('id')).first()
+        db.session.delete(project)
+        db.session.commit()
+        return jsonify({
+            "message": "success",
+        })
 
 @app.route('/update', methods=['POST'])
 def update():
