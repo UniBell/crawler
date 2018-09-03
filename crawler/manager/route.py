@@ -62,12 +62,12 @@ def update():
             'desc': request.form.get('desc')
         }
         project = db.session.query(Project).filter(Project.id == projectId)
-        print(utils.object_as_dict(project))
+        print(project.name, project.id, project.desc)
         project.name = dic['name']
         project.behavior = dic['behavior']
         project.config = dic['config']
         project.desc = dic['desc']
-        print(utils.object_as_dict(project))
+        print(project.name, project.id, project.desc)
         db.session.commit()
         return jsonify({
             "message": 'success'
