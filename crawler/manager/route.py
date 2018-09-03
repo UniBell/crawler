@@ -64,6 +64,8 @@ def update():
         }
         project = db.session.query(Project).filter(Project.id == projectId)
         for key,value in dic.items():
+            print(key)
+            print(project.key)
             project.key = value
             db.session.commit()
         # project.name = dic['name']
