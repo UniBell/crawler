@@ -61,7 +61,7 @@ def update():
             'config': request.form.get('config'),
             'desc': request.form.get('desc')
         }
-        project = db.session.query(Project).filter(Project.id == projectId)
+        project = Project.query.filter_by(id = projectId).first()
         print(project.name, project.id, project.desc)
         project.name = dic['name']
         project.behavior = dic['behavior']
