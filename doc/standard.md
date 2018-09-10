@@ -55,9 +55,9 @@
 
 #### 项目管理 ####
 
-管理需要mock的项目，每个服务包含一个名称，一段文字说明，关于项目行为的定义和项目的配置定义。
+管理需要爬取的项目，每个项目包含一个名称，一段文字说明，关于项目行为的定义和项目的配置定义。
 
-1. 读取服务列表：
+1. 读取项目列表：
 
     HTTP方法 GET，uri: /api/project
 
@@ -76,27 +76,17 @@
       {
         "id": "12",
         "name": "test1",
-        "desc": "test for xxxxxx",
-        "behavior": 0,
-        "config" : {
-           "base_url": "https://club.jd.com/comment/productPageComments.action",
-           "interval": 3600
-        }
+        "desc": "test for xxxxxx"
       },
       {
         "id": "13",
         "name": "test1",
         "desc": "test for xxxxxx"
-        "behavior": 0,
-        "config" : {
-           "base_url": "https://club.jd.com/comment/productPageComments.action",
-           "interval": 3600
-        }
       }
     ]
     ````
 
-    读取单个服务：
+    读取单个项目：
    
     HTTP方法 GET，uri: /api/project/{$_id}
 
@@ -107,16 +97,11 @@
     {
         "id": "12",
         "name": "test1",
-        "desc": "test for xxxxxx",
-        "behavior": 0,
-        "config" : {
-           "base_url": "https://club.jd.com/comment/productPageComments.action",
-           "interval": 3600
-        }
+        "desc": "test for xxxxxx"
     }
     ````
 
-2. 增加一个服务
+2. 增加一个项目
 
     HTTP方法 POST，uri: /api/project
    
@@ -124,12 +109,7 @@
     ````
     {
         "name": "test1",
-        "desc": "test for xxxxxx",
-        "behavior": 0,
-        "config" : {
-           "base_url": "https://club.jd.com/comment/productPageComments.action",
-           "interval": 3600
-        }
+        "desc": "test for xxxxxx"
     }
     ````
    
@@ -138,17 +118,14 @@
     {
         "id": "12",
         "name": "test1",
-        "desc": "test for xxxxxx",
-        "behavior": 0,
-        "config" : {
-           "base_url": "https://club.jd.com/comment/productPageComments.action",
-           "interval": 3600
-        }
+        "desc": "test for xxxxxx"
     }
     ```
 
-3. 删除一个服务
+3. 删除一个项目
 
    HTTP方法 DELETE，uri: /api/project/{$_id}
    
    返回HTTP CODE 204，body无内容
+
+
