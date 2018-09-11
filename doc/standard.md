@@ -128,4 +128,39 @@
    
    返回HTTP CODE 204，body无内容
 
+#### 爬虫管理 ####
+
+1. 列出一个项目下的爬虫列表:
+
+    HTTP方法 GET，uri: /api/project/{$poject_id}/crawler
+
+    可选参数：
+    
+    分页：page, size -- 整数，例如：page=0&size=20 表示首页数据，每页20条
+
+    返回：
+    ````
+    Headers:
+    x-page: 0
+    x-size: 20
+    x-count: 2
+    
+    [
+      {
+        "id": "115",
+        "url": "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
+        "rules": [
+            {
+                "select": "CommentsCount[0].SkuId",
+                "as": "sku_id"
+            },
+        ]
+      },
+      {
+        "id": "127",
+        "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
+        "desc": "test for xxxxxx"
+      }
+    ]
+    ````
 
