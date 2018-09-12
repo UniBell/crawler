@@ -149,18 +149,22 @@
       {
         "id": "115",
         "url": "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
+        "contentType": "json",
+        "createTime": "2018-09-11T02:03:05.23+08:00",
+        "behavior": "timing-interval-1m",
         "rules": [
             {
-                "select": "CommentsCount[0].SkuId",
-                "as": "sku_id"
+                "select": "CommentsCount[0]['SkuId']",
+                "as": "skuId"
             },
+            {
+                "select": "CommentsCount[0]['CommentCount']",
+                "as": "commentCount"
+            }
+            ...
         ]
-      },
-      {
-        "id": "127",
-        "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
-        "desc": "test for xxxxxx"
       }
+      ...
     ]
     ````
 
