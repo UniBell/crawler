@@ -151,7 +151,7 @@
         "url": "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
         "contentType": "json",
         "createTime": "2018-09-11T02:03:05.23+08:00",
-        "behavior": "timing-interval-1m",
+        "behavior": "timing-interval-5m",
         "rules": [
             {
                 "select": "CommentsCount[0]['SkuId']",
