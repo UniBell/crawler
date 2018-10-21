@@ -1,0 +1,21 @@
+fetch("https://stock.xueqiu.com/v5/stock/quote.json?symbol=AAPL&extend=detail", {"credentials":"include","headers":{},"referrer":"https://xueqiu.com/S/AAPL","referrerPolicy":"unsafe-url","body":null,"method":"GET","mode":"cors"});
+========================================================================
+HTTP/1.1 200 OK
+Server: openresty/1.11.2.4
+Date: Sat, 20 Oct 2018 08:31:30 GMT
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Trace-Id: ca5dbed8265cbb63
+X-Application-Context: xueqiu-stock-api-rpc:production
+P3P: CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+Cache-Control: private, no-store, no-cache, must-revalidate, max-age=0
+Access-Control-Allow-Origin: https://xueqiu.com
+Access-Control-Allow-Credentials: true
+Access-Control-ALLow-Methods: GET, POST, OPTIONS, DELETE
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+Content-Encoding: gzip
+
+========================================================================
+{"data":{"market":{"status_id":8,"region":"US","status":"休市","time_zone":"America/New_York"},"quote":{"current_ext":219.0,"symbol":"AAPL","high52w":233.47,"percent_ext":-0.14,"type":0,"tick_size":0.01,"float_shares":null,"high":221.26,"float_market_capital":null,"timestamp_ext":1539993594038,"lot_size":1,"lock_set":1,"chg":3.29,"eps":11.06,"last_close":216.02,"volume":33078726,"volume_ratio":1.06,"turnover_rate":0.68,"low52w":150.24,"name":"苹果","exchange":"NASDAQ","total_shares":4829926000,"status":1,"code":"AAPL","avg_price":219.38,"percent":1.52,"psr":4.19,"amplitude":1.77,"current":219.31,"current_year_percent":31.08,"issue_date":345398400000,"sub_type":"257","low":217.43,"market_capital":1.05925107106E12,"dividend":2.92,"dividend_yield":1.35173,"currency":"USD","chg_ext":-0.31,"navps":23.54,"beta":1.4132,"timestamp":1539979200328,"pe_lyr":23.81,"amount":6.947745514E9,"short_ratio":1.29,"inst_hld":54.81,"pb":9.3165,"pe_ttm":19.829,"contract_size":100,"variable_tick_size":"0.0001 1 0.01","time":1539979200328,"open":218.06},"others":{"pankou_ratio":20.0},"tags":[{"description":"融","value":6},{"description":"空","value":7}]},"error_code":0,"error_description":""}
