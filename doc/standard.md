@@ -51,6 +51,39 @@
 
     返回的数据是一个列表，分页信息不在返回的数据中而是在HTTP返回头部中，HTTP头部中的分页信息在三个字段中：x-page，x-size，x-count：page表示第几页，页数从0开始；size表示每页有多少条数据；count表示数据的总数。
 
+### 架构设计 ###
+
+#### 业务逻辑 ###
+
+1. 每个task中有一个或者多个爬虫(crawler)。每个task运行在一个独立进程中（和提供管理功能），使用独立进程来运行task有如下好处：
+
+    多个进程可以充分使用多核，避免Python的GIL（全局解释器锁）带来的多线程多核性能问题。
+
+    如果task数量很多，需要很多的cpu资源，可以很方便的把它们部署到集群上，比如用Kubernetes编排的Docker集群。
+
+2. 每个task中只能存在同一类型的爬虫，比如http或者websocket，可以认为每个task是一个容器，先设置好某一类爬虫的环境（比如获取登陆cookie，或者维护一个websocket长连接），然后在统一的环境中运行一系列爬虫。
+
+3. crawler/manager 负责管理task。
+
+4. crawler/task 是任务相关的代码，其中 crawler/module 是相应的爬虫实现，比如 crawler/module/http 是http爬虫的模块代码。
+
+5. manager和task之间分属不同的进程，manager启动task的时候，
+
+task/ (必须)
+   |------ config (必须)
+   |------ state (必须)
+   |------ stats (可选)
+   |------ log (可选)
+   |------ crawler (必须)
+              |------ state (必须)
+              |------ data (必须)
+              |------ stats (可选)
+              |------ log (可选)
+
+#### 数据存储 ####
+
+task列表/配置/状态，以及爬虫的列表/配置/状态，都存放在MySQL里。爬虫爬到的数据，格式化后以json方式保存在ElasticSearch中（暂时，今后考虑开发各种数据库插件）。
+
 ### API接口 ###
 
 #### 项目管理 ####
@@ -59,7 +92,7 @@
 
 1. 读取项目列表：
 
-    HTTP方法 GET，uri: /api/project
+    HTTP方法 GET，uri: /api/task
 
     可选参数：
     
@@ -88,9 +121,9 @@
 
     读取单个项目：
    
-    HTTP方法 GET，uri: /api/project/{$_id}
+    HTTP方法 GET，uri: /api/task/{$_id}
 
-    比如 GET /api/project/12
+    比如 GET /api/task/12
    
     返回：
     ````
@@ -103,7 +136,7 @@
 
 2. 增加一个项目
 
-    HTTP方法 POST，uri: /api/project
+    HTTP方法 POST，uri: /api/task
    
     提交：
     ````
@@ -124,15 +157,46 @@
 
 3. 删除一个项目
 
-   HTTP方法 DELETE，uri: /api/project/{$_id}
+   HTTP方法 DELETE，uri: /api/task/{$_id}
    
    返回HTTP CODE 204，body无内容
+
+#### 任务设置 ####
+
+1. 获得一个任务的设置：
+
+    HTTP方法 GET，uri: /api/task/{$task_id}/config
+
+    返回：
+
+    ````
+    {
+        "crawlerType": "http", // or websocket
+        "storage": ""
+    }
+    ````
+
+#### 任务状态 ####
+
+1. 获得一个任务的状态：
+
+    HTTP方法 GET，uri: /api/task/{$task_id}/state
+
+    返回：
+
+    ````
+    {
+        "activated": true,  //默认为 false
+        "running": "normal" //initializing, stopping, stopped
+    }
+    ````
+
 
 #### 爬虫管理 ####
 
 1. 列出一个项目下的爬虫列表:
 
-    HTTP方法 GET，uri: /api/project/{$poject_id}/crawler
+    HTTP方法 GET，uri: /api/task/{$task_id}/crawler
 
     可选参数：
     
@@ -148,21 +212,25 @@
     [
       {
         "id": "115",
-        "url": "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
-        "contentType": "json",
         "createTime": "2018-09-11T02:03:05.23+08:00",
-        "behavior": "timing-interval-5m",
-        "rules": [
-            {
-                "select": "CommentsCount[0]['SkuId']",
-                "as": "skuId"
-            },
-            {
-                "select": "CommentsCount[0]['CommentCount']",
-                "as": "commentCount"
-            }
-            ...
-        ]
+        "settings": {
+            "url": "https://club.jd.com/comment/productCommentSummaries.action?referenceIds=6815960",
+            "headers": {},
+            "behavior": "timing-interval-5m",
+            "method": "GET",
+            "contentType": "json",
+            "rules": [
+                {
+                    "select": "CommentsCount[0]['SkuId']",
+                    "as": "skuId"
+                },
+                {
+                    "select": "CommentsCount[0]['CommentCount']",
+                    "as": "commentCount"
+                }
+                ...
+            ]
+        }
       }
       ...
     ]
