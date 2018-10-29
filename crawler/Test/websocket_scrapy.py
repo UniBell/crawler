@@ -12,3 +12,4 @@ async def bitmex():
         print(resp)
 
 asyncio.get_event_loop().run_until_complete(bitmex())
+asyncio.get_event_loop().run_forever()
