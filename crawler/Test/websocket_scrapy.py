@@ -1,13 +1,13 @@
 # from ws4py.client.threadedclient import WebSocketClient
 import asyncio
 import websockets
-# import json
+import json
 
 async def bitmex():
     async with websockets.connect(
         'wss://www.bitmex.com/realtime') as websocket:
         param = {"op": "subscribe", "args": ["orderBookL2:XBTUSD"]}
-        await websocket.send(param)
+        await websocket.send(json.dumps(param))
         resp = await websocket.recv()
         print(resp)
 
