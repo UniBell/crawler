@@ -13,8 +13,6 @@ async def bitmex():
             print(json.loads(str(resp)))            
 
 asyncio.get_event_loop().run_until_complete(bitmex())
-asyncio.get_event_loop().run_forever()
-
 
 #旧写法
 # class BT_Client(WebSocketClient):
