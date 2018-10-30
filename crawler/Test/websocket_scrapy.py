@@ -3,19 +3,17 @@ import asyncio
 import websockets
 import json
 
-@asyncio.coroutine
-def bitmex():
-    websocket = yield from websockets.connect(
-        'wss://www.bitmex.com/realtime')
-    try:
+async def bitmex():
+    async with websockets.connect(
+        'wss://www.bitmex.com/realtime') as websocket:
         param = {"op": "subscribe", "args": ["orderBookL2:XBTUSD"]}
-        yield from websocket.send(json.dumps(param))
-        resp = yield from websocket.recv()
-        print(resp)    
-    finally:
-        yield from websocket.close()        
+        await websocket.send(json.dumps(param))
+        while True:
+            resp = await websocket.recv()
+            print(json.loads(str(resp)))            
 
 asyncio.get_event_loop().run_until_complete(bitmex())
+asyncio.get_event_loop().run_forever()
 
 
 #旧写法
