@@ -14,3 +14,10 @@ class Project(db.Model):
     config = db.Column(db.String(2000), unique = False, nullable = False)
     #项目描述，可选
     desc = db.Column(db.String(120), unique = False, nullable = True)
+
+class OrderBook(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    table = db.Column(db.String(20), unique = True, nullable = False)
+    action = db.Column(db.String(20), unique = True, nullable = False)
+    data = db.Column(db.Array, unique = True, nullable = False)
+    

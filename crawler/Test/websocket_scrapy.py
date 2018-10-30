@@ -3,14 +3,18 @@ import asyncio
 import websockets
 import json
 
+# {'table': 'orderBookL2', 'action': 'update', 'data': [{'symbol': 'XBTUSD', 'id': 8799997000, 'side': 'Buy', 'size': 35}]}
+
 async def bitmex():
     async with websockets.connect(
         'wss://www.bitmex.com/realtime') as websocket:
         param = {"op": "subscribe", "args": ["orderBookL2:XBTUSD"]}
         await websocket.send(json.dumps(param))
+        
         while True:
             resp = await websocket.recv()
-            print(json.loads(str(resp)))            
+            data = json.loads(str(resp))
+            # print(data)            
 
 asyncio.get_event_loop().run_until_complete(bitmex())
 
