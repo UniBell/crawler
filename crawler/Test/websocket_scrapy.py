@@ -15,8 +15,8 @@ async def bitmex():
         while True:
             resp = await websocket.recv()
             data = json.loads(str(resp))
-            project = OrderBook(**data)
-            db.session.add(project)
+            order = OrderBook(**data)
+            db.session.add(order)
             db.session.commit()
             # print(data)            
 
