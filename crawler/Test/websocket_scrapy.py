@@ -1,7 +1,8 @@
-# from ws4py.client.threadedclient import WebSocketClient
 import asyncio
 import websockets
 import json
+from crawler.manager import db
+from crawler.manager.model import OrderBook
 
 # {'table': 'orderBookL2', 'action': 'update', 'data': [{'symbol': 'XBTUSD', 'id': 8799997000, 'side': 'Buy', 'size': 35}]}
 
@@ -14,11 +15,17 @@ async def bitmex():
         while True:
             resp = await websocket.recv()
             data = json.loads(str(resp))
+            project = OrderBook(**data)
+            db.session.add(project)
+            db.session.commit()
             # print(data)            
 
 asyncio.get_event_loop().run_until_complete(bitmex())
 
 #旧写法
+# from ws4py.client.threadedclient import WebSocketClient
+# import json
+
 # class BT_Client(WebSocketClient):
    
 #    def opened(self):

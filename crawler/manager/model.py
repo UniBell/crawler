@@ -19,5 +19,5 @@ class OrderBook(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     table = db.Column(db.String(20), unique = True, nullable = False)
     action = db.Column(db.String(20), unique = True, nullable = False)
-    data = db.Column(db.Array, unique = True, nullable = False)
-    
+    data = db.Column(db.String(20), unique = True, nullable = False)
+
