@@ -6,6 +6,7 @@ from crawler.manager import db
 from flask import jsonify
 from crawler.manager import utils
 from crawler.manager.model import Project
+from crawler.manager.model import Order
 from flask import request
 from flask import make_response,Response
 from crawler.Test import websocket_scrapy
@@ -80,3 +81,13 @@ def update():
 @app.route('/insert-bitmex-orderbook10')
 def insert():
     bitmex()
+
+@app.route('/get-bitmex-orderbook')
+def list():
+    rows = Order.query.all()
+    l = []
+    for row in rows:
+        l.append(utils.object_as_dict(row))
+    return jsonify({
+        'data': l
+    })
