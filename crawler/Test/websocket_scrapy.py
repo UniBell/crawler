@@ -4,8 +4,6 @@ import json
 from crawler.manager import db
 from crawler.manager.model import OrderBook
 
-# {'table': 'orderBookL2', 'action': 'update', 'data': [{'symbol': 'XBTUSD', 'id': 8799997000, 'side': 'Buy', 'size': 35}]}
-
 async def bitmex():
     async with websockets.connect(
         'wss://www.bitmex.com/realtime') as websocket:
