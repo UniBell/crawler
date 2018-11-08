@@ -9,16 +9,26 @@ from crawler.manager.model import OrderBook
 async def bitmex():
     async with websockets.connect(
         'wss://www.bitmex.com/realtime') as websocket:
-        param = {"op": "subscribe", "args": ["orderBookL2:XBTUSD"]}
+        param = {"op": "subscribe", "args": ["orderBook10:XBTUSD"]}
         await websocket.send(json.dumps(param))
         
         while True:
             resp = await websocket.recv()
-            data = json.loads(str(resp))
-            order = OrderBook(**data)
-            db.session.add(order)
-            db.session.commit()
-            # print(data)            
+            result = json.loads(str(resp))
+            if 'data' in result.keys():
+                data = result['data'][0]
+                print(data)
+                dict = {
+                    'symbol': data['symbol'],
+                    'timestamp': data['timestamp'],
+                    'bids': data['bids'],
+                    'asks': data['asks']
+                }
+                order = OrderBook(**dict)
+                print(order)
+                db.session.add(order)
+                db.session.commit()
+                break        
 
 asyncio.get_event_loop().run_until_complete(bitmex())
 
