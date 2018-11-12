@@ -11,4 +11,3 @@ db = SQLAlchemy(app)
 
 import crawler.manager.route
 import crawler.manager.model
-import crawler.Test.websocket_scrapy

@@ -30,9 +30,6 @@ async def bitmex():
 
 asyncio.get_event_loop().run_until_complete(bitmex())
 
-if __name__ == '__main__':
-    bitmex()
-
 #旧写法
 # from ws4py.client.threadedclient import WebSocketClient
 # import json
