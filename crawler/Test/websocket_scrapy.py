@@ -19,8 +19,8 @@ async def bitmex():
                 dict = {
                     'symbol': data['symbol'],
                     'timestamp': data['timestamp'],
-                    'bids': data['bids'],
-                    'asks': data['asks']
+                    'bids': json.dumps(data['bids']),
+                    'asks': json.dumps(data['asks'])
                 }
                 order = OrderBook(**dict)
                 print(order)
