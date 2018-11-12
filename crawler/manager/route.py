@@ -80,7 +80,7 @@ def update():
 
 @app.route('/insert-bitmex-orderbook10')
 def insert():
-    websocket_scrapy.bitmex()
+    websocket_scrapy.Init()
     return jsonify({
         "code": 200,
         "message": "success"
