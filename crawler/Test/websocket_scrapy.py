@@ -28,7 +28,8 @@ async def bitmex():
                 db.session.commit()
                 break        
 
-asyncio.get_event_loop().run_until_complete(bitmex())
+def Init():
+    asyncio.get_event_loop().run_until_complete(bitmex())
 
 #旧写法
 # from ws4py.client.threadedclient import WebSocketClient
