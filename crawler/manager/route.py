@@ -10,6 +10,7 @@ from crawler.manager.model import OrderBook
 from flask import request
 from flask import make_response,Response
 from crawler.Test import websocket_scrapy
+from crawler.Test import test
 
 def Response_headers(content):  
     resp = Response(content)  
@@ -80,8 +81,9 @@ def update():
 
 @app.route('/insert-bitmex-orderbook10')
 def insert():
-    websocket_scrapy.bitmex()
-    websocket_scrapy.Init()
+    # websocket_scrapy.bitmex()
+    # websocket_scrapy.Init()
+    test.test()
     return jsonify({
         "code": 200,
         "message": "success"
