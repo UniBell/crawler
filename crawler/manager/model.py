@@ -18,7 +18,7 @@ class Project(db.Model):
 class OrderBook(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     symbol = db.Column(db.String(200), unique = True, nullable = False)
-    timestamp = db.Column(db.String(200), unique = True, nullable = False)
-    bids = db.Column(db.String(255), unique = True, nullable = False)
-    asks = db.Column(db.String(255), unique = True, nullable = False)
+    timestamp = db.Column(db.Date(200), unique = True, nullable = False)
+    bids = db.Column(db.Text(1024), unique = True, nullable = False)
+    asks = db.Column(db.Text(1024), unique = True, nullable = False)
 
