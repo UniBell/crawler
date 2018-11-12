@@ -80,7 +80,7 @@ def update():
 
 @app.route('/insert-bitmex-orderbook10')
 def insert():
-    bitmex()
+    websocket_scrapy.bitmex()
 
 @app.route('/get-bitmex-orderbook')
 def list():
